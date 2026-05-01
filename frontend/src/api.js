@@ -1,5 +1,4 @@
-const API = "https://your-backend.up.railway.app/api";
-
+const API = "https://etharaproject-production-75b4.up.railway.app/api";
 export const loginUser = async (data) => {
   const res = await fetch(`${API}/auth/login`, {
     method: "POST",
