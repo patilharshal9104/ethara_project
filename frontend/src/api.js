@@ -1,4 +1,4 @@
-const API = "http://localhost:5000/api";
+const API = "https://your-backend.up.railway.app/api";
 
 export const loginUser = async (data) => {
   const res = await fetch(`${API}/auth/login`, {
