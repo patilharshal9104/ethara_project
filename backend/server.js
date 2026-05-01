@@ -7,11 +7,16 @@ dotenv.config();
 
 const app = express();
 
-// ✅ MIDDLEWARE FIRST
-app.use(cors());
+// ✅ CORS FIX (IMPORTANT FOR VERCEL)
+app.use(cors({
+  origin: "*", // allow all (safe for your project)
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
+
 app.use(express.json());
 
-// ✅ ROUTES AFTER MIDDLEWARE
+// ✅ ROUTES
 const authRoutes = require("./routes/auth");
 app.use("/api/auth", authRoutes);
 
@@ -21,16 +26,21 @@ app.use("/api/tasks", taskRoutes);
 const userRoutes = require("./routes/user");
 app.use("/api/users", userRoutes);
 
-// MongoDB connection
-mongoose.connect(process.env.MONGO_URI)
-.then(() => console.log("MongoDB Connected ✅"))
-.catch(err => console.log(err));
-
-// Test route
+// ✅ TEST ROUTES
 app.get("/", (req, res) => {
   res.send("API Running 🚀");
 });
 
+app.get("/api", (req, res) => {
+  res.send("API working");
+});
+
+// ✅ MONGODB CONNECTION
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log("MongoDB Connected ✅"))
+  .catch(err => console.log(err));
+
+// ✅ SERVER START
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
