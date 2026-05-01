@@ -14,12 +14,13 @@ export default function Dashboard() {
   // FETCH TASKS
   const fetchTasks = async () => {
     const data = await getTasks(token);
+    console.log("TASKS:", data); // 👈 add this
     setTasks(data);
   };
 
   // FETCH USERS
   const fetchUsers = async () => {
-    const data = await getUsers();
+    const data = await getUsers(token);
     setUsers(data);
   };
 

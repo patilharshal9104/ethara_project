@@ -42,7 +42,11 @@ export const updateTask = async (id, data, token) => {
   });
   return res.json();
 };
-export const getUsers = async () => {
-  const res = await fetch("http://localhost:5000/api/users");
+export const getUsers = async (token) => {
+  const res = await fetch(`${API}/users`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return res.json();
 };
